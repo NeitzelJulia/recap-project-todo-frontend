@@ -1,0 +1,8 @@
+.lanes {
+    max-width: calc(100vw - 20px);
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    min-height: calc(100vh - 240px);
+}

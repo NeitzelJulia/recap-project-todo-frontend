@@ -1,0 +1,44 @@
+/* Standardfarben (Light Mode) */
+.nav {
+    --nav-bg: #222222;
+    --nav-fg: #ffffff;
+    --nav-link: #bbbbbb;
+    --nav-link-hover: #ffffff;
+    --nav-link-active: #ffffff;
+    --nav-link-active-border: #ffffff;
+
+    background: var(--nav-bg);
+    color: var(--nav-fg);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 2.75rem;
+}
+
+/* Dark Mode: passt sich an :root background=#242424 an */
+@media (prefers-color-scheme: dark) {
+    .nav {
+        --nav-bg: #1a1a1a;
+        --nav-fg: rgba(255,255,255,0.92);
+        --nav-link: #cccccc;
+        --nav-link-hover: #ffffff;
+        --nav-link-active: #ffffff;
+        --nav-link-active-border: #ffffff;
+    }
+}
+
+.link {
+    color: var(--nav-link);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--nav-link-hover);
+}
+
+.active {
+    color: var(--nav-link-active);
+    font-weight: 600;
+    border-bottom: 2px solid var(--nav-link-active-border);
+}

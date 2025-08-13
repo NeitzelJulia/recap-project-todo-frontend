@@ -1,0 +1,7 @@
+.card {
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: .6rem .7rem;
+    background: var(--card-bg);
+    color: inherit;
+}
