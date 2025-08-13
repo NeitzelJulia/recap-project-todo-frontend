@@ -9,7 +9,7 @@ export default function ToDoCard({todo}: ToDoProps) {
     console.log(todo)
     return (
         <li className={styles.card}>
-            Beispiel-Aufgabe A
+            {todo.description}
         </li>
     )
 }

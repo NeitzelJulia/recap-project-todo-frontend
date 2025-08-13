@@ -2,26 +2,14 @@ import styles from "./Lane.module.css";
 import type {Status} from "../types/Status.ts";
 import {statusLabels} from "../types/Status.ts";
 import ToDoCard from "./ToDoCard.tsx";
-import axios from "axios";
 import type {ToDo} from "../types/ToDo.ts";
-import {useState} from "react";
 
 type LaneProps = {
     status: Status;
+    todos: ToDo[];
 }
 
-export default function Lane({ status }: LaneProps) {
-
-    const [todos, setTodos] = useState<ToDo[]>([]);
-    const laneTodos = todos
-        .filter((t) => t.status === status)
-
-    function getAllTodos() {
-        axios.get("/api/todo")
-            .then((res) => setTodos(res.data));
-    }
-
-    getAllTodos();
+export default function Lane({status, todos}: LaneProps) {
 
     return (
         <div className={styles.lane}>
@@ -30,8 +18,8 @@ export default function Lane({ status }: LaneProps) {
                 <span className={styles.laneBadge}>0</span>
             </div>
             <ul className={styles.laneList}>
-                {laneTodos.map((todo) =>
-                    <ToDoCard todo={todo}/>
+                {todos.map((todo) =>
+                    <ToDoCard todo={todo} key={todo.id}/>
                 )}
 
             </ul>
