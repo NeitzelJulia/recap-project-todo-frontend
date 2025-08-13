@@ -4,6 +4,7 @@
     --muted:         #666;
     --lane-bg:       #ffffff;
     --lane-border:   #e6e8eb;
+    --newcard-bg:    #404040;
     --card-bg:       #ffffff;
     --card-border:   #e6e8eb;
     --badge-bg:      #222222;
@@ -24,6 +25,8 @@
         --muted:         #a8a8a8;
         --lane-bg:       #2a2a2a;
         --lane-border:   #3a3a3a;
+        --newcard-bg:    #444444;
+        --newcard-bg-hover:   #555555;
         --card-bg:       #303030;
         --card-border:   #3f3f3f;
         --badge-bg:      #e6e8eb;

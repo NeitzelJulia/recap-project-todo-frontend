@@ -3,6 +3,7 @@ import type {Status} from "../types/Status.ts";
 import {statusLabels} from "../types/Status.ts";
 import ToDoCard from "./ToDoCard.tsx";
 import type {ToDo} from "../types/ToDo.ts";
+import NewToDoCard from "./NewToDoCard.tsx";
 
 type LaneProps = {
     status: Status;
@@ -21,7 +22,7 @@ export default function Lane({status, todos}: LaneProps) {
                 {todos.map((todo) =>
                     <ToDoCard todo={todo} key={todo.id}/>
                 )}
-
+                {status === "OPEN" && <NewToDoCard/>}
             </ul>
         </div>
     )
