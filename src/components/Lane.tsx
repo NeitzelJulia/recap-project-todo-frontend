@@ -15,7 +15,7 @@ export default function Lane({status, todos}: LaneProps) {
         <div className={styles.lane}>
             <div className={styles.laneHeader}>
                 <h2 className={styles.laneTitle}>{statusLabels[status]}</h2>
-                <span className={styles.laneBadge}>0</span>
+                <span className={styles.laneBadge}>{todos.length}</span>
             </div>
             <ul className={styles.laneList}>
                 {todos.map((todo) =>

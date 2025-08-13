@@ -6,7 +6,6 @@ type ToDoProps = {
 }
 
 export default function ToDoCard({todo}: ToDoProps) {
-    console.log(todo)
     return (
         <li className={styles.card}>
             {todo.description}
