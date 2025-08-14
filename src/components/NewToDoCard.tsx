@@ -3,28 +3,24 @@ import styles from "./ToDo.module.css";
 import plusIcon from "../assets/icons/plus-circle-svgrepo-com.svg";
 import Modal from "./Modal.tsx";
 import ToDoForm from "./ToDoForm.tsx";
-import axios from "axios";
+import type {TodoPayload} from "../api/todos";
 
-type Status = "OPEN" | "IN_PROGRESS" | "DONE";
-type TodoPayload = { description: string; status: Status };
+type Props = {
+    onCreate?: (p: TodoPayload) => void;
+};
 
-export default function NewToDoCard(){
+export default function NewToDoCard({ onCreate }: Props) {
     const [open, setOpen] = useState(false);
 
-    function openNewToDoDialog(){
+    function openNewToDoDialog() {
         setOpen(true);
     }
 
     function saveNewTodo(data: TodoPayload) {
-        axios
-            .post("/api/todo", data)
-            .then((res) => {
-                console.log("Todo erstellt:", res.data);
-                setOpen(false); // Modal schließen
-            })
-            .catch((err) => {
-                console.error("Fehler beim Erstellen:", err);
-            });
+        if (onCreate) {
+            onCreate(data); // erstellt im App-State
+            setOpen(false); // Modal sofort schließen
+        }
     }
 
     return (

@@ -4,14 +4,15 @@ import {statusLabels} from "../types/Status.ts";
 import ToDoCard from "./ToDoCard.tsx";
 import type {ToDo} from "../types/ToDo.ts";
 import NewToDoCard from "./NewToDoCard.tsx";
+import type {TodoPayload} from "../api/todos";
 
 type LaneProps = {
     status: Status;
     todos: ToDo[];
-}
+    onCreate?: (p: TodoPayload) => void;
+};
 
-export default function Lane({status, todos}: LaneProps) {
-
+export default function Lane({status, todos, onCreate}: LaneProps) {
     return (
         <div className={styles.lane}>
             <div className={styles.laneHeader}>
@@ -19,11 +20,9 @@ export default function Lane({status, todos}: LaneProps) {
                 <span className={styles.laneBadge}>{todos.length}</span>
             </div>
             <ul className={styles.laneList}>
-                {todos.map((todo) =>
-                    <ToDoCard todo={todo} key={todo.id}/>
-                )}
-                {status === "OPEN" && <NewToDoCard/>}
+                {todos.map((todo) => <ToDoCard todo={todo} key={todo.id} />)}
+                {status === "OPEN" && <NewToDoCard onCreate={onCreate} />}
             </ul>
         </div>
-    )
+    );
 }
