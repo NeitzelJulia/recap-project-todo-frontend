@@ -69,10 +69,14 @@
     justify-content: center;
 }
 
+.iconButton:focus {
+    outline: none;
+}
+
 .iconSvg {
-    width: 18px; /* kleiner als das Plus-Icon */
+    width: 18px;
     height: 18px;
-    filter: brightness(0) invert(1); /* hell im Dark Mode */
+    filter: brightness(0) invert(1);
     opacity: 0.85;
     transition: opacity 0.15s ease;
 }
