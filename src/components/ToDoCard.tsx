@@ -10,9 +10,10 @@ type ToDoProps = {
     todo: ToDo;
     onDelete?: (id: string) => void;
     onMoveNext?: (t: ToDo) => void;
+    onEdit?: () => void;
 };
 
-export default function ToDoCard({todo, onDelete, onMoveNext}: ToDoProps) {
+export default function ToDoCard({todo, onDelete, onMoveNext, onEdit}: ToDoProps) {
     function handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.stopPropagation();
         onDelete?.(todo.id);
@@ -29,16 +30,27 @@ export default function ToDoCard({todo, onDelete, onMoveNext}: ToDoProps) {
                 <span className={styles.cardText}>{todo.description}</span>
             </div>
             <div className={styles.cardActions}>
-                <button className={styles.iconButton} title="Bearbeiten">
+                <button className={styles.iconButton}
+                        title="Bearbeiten"
+                        onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
+                >
                     <img src={editIcon} alt="Bearbeiten" className={styles.iconSvg} />
                 </button>
-                <button className={styles.iconButton} title="Löschen" onClick={handleDeleteClick}>
+                <button className={styles.iconButton}
+                        title="Löschen"
+                        onClick={handleDeleteClick}
+                >
                     <img src={deleteIcon} alt="Löschen" className={styles.iconSvg} />
                 </button>
-                <button className={styles.iconButton} title="Details anzeigen">
+                <button className={styles.iconButton}
+                        title="Details anzeigen"
+                >
                     <img src={detailsIcon} alt="Details" className={styles.iconSvg} />
                 </button>
-                <button className={styles.iconButton} title="Eine Lane weiter" onClick={handleMoveNextClick}>
+                <button className={styles.iconButton}
+                        title="Eine Lane weiter"
+                        onClick={handleMoveNextClick}
+                >
                     <img src={moveIcon} alt="Eine Lane weiter" className={styles.iconSvg} />
                 </button>
             </div>

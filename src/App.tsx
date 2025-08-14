@@ -8,7 +8,7 @@ import InProgressPage from "./pages/InProgressPage.tsx";
 import DonePage from "./pages/DonePage.tsx";
 
 function App() {
-    const { todos, addTodo, removeTodo, moveToNextLane } = useTodos();
+    const { todos, addTodo, removeTodo, moveToNextLane, updateTodo } = useTodos();
 
     return (
         <>
@@ -21,6 +21,7 @@ function App() {
                         onCreate={addTodo}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
+                        onUpdate={updateTodo}
                     />
                 } />
                 <Route path="/todo/open" element={
@@ -29,6 +30,7 @@ function App() {
                         onCreate={addTodo}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
+                        onUpdate={updateTodo}
                     />
                 } />
                 <Route path="/todo/in_progress" element={
@@ -36,6 +38,7 @@ function App() {
                         todos={todos}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
+                        onUpdate={updateTodo}
                     />
                 } />
                 <Route path="/todo/done" element={
@@ -43,6 +46,7 @@ function App() {
                         todos={todos}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
+                        onUpdate={updateTodo}
                     />
                 } />
             </Routes>

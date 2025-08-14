@@ -9,9 +9,10 @@ type OverviewPageProps = {
     onCreate: (p: TodoPayload) => void;
     onDelete: (id: string) => void;
     onMoveNext: (t: ToDo) => void;
+    onUpdate: (t: ToDo) => void;
 };
 
-export default function OpenPage({todos, onCreate, onDelete, onMoveNext}: OverviewPageProps) {
+export default function OpenPage({todos, onCreate, onDelete, onMoveNext, onUpdate}: OverviewPageProps) {
     return (
         <section className={styles.board}>
             <div className={lanestyles.lanes}>
@@ -20,6 +21,7 @@ export default function OpenPage({todos, onCreate, onDelete, onMoveNext}: Overvi
                       onCreate={onCreate}
                       onDelete={onDelete}
                       onMoveNext={onMoveNext}
+                      onUpdate={onUpdate}
                 />
             </div>
         </section>
