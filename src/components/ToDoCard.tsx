@@ -11,9 +11,10 @@ type ToDoProps = {
     onDelete?: (id: string) => void;
     onMoveNext?: (t: ToDo) => void;
     onEdit?: () => void;
+    onDetails?: () => void;
 };
 
-export default function ToDoCard({todo, onDelete, onMoveNext, onEdit}: ToDoProps) {
+export default function ToDoCard({todo, onDelete, onMoveNext, onEdit, onDetails }: ToDoProps) {
     function handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.stopPropagation();
         onDelete?.(todo.id);
@@ -44,6 +45,7 @@ export default function ToDoCard({todo, onDelete, onMoveNext, onEdit}: ToDoProps
                 </button>
                 <button className={styles.iconButton}
                         title="Details anzeigen"
+                        onClick={(e) => { e.stopPropagation(); onDetails?.(); }}
                 >
                     <img src={detailsIcon} alt="Details" className={styles.iconSvg} />
                 </button>

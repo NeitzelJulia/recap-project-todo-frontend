@@ -21,7 +21,7 @@ type LaneProps = {
 export default function Lane({status, todos, onCreate, onDelete, onMoveNext, onUpdate}: LaneProps) {
 
     const [editing, setEditing] = useState<ToDo | null>(null);
-
+    const [details, setDetails] = useState<ToDo | null>(null);
 
     function handleEditSave(data: { description: string; status: "OPEN" | "IN_PROGRESS" | "DONE" }) {
         if (!editing || !onUpdate) return;
@@ -43,6 +43,7 @@ export default function Lane({status, todos, onCreate, onDelete, onMoveNext, onU
                         onDelete={onDelete}
                         onMoveNext={onMoveNext}
                         onEdit={() => setEditing(todo)}
+                        onDetails={() => setDetails(todo)}
                     />
                 )}
                 {status === "OPEN" && <NewToDoCard onCreate={onCreate} />}
@@ -58,6 +59,26 @@ export default function Lane({status, todos, onCreate, onDelete, onMoveNext, onU
                     />
                 )}
             </Modal>
+            <Modal open={!!details} onClose={() => setDetails(null)}>
+                <h3>To-Do Details</h3>
+                {details && (
+                    <div className={styles.details}>
+                        <div className={styles.detailsRow}>
+                            <div className={styles.detailsLabel}>ID:</div>
+                            <div className={styles.detailsValue}>{details.id}</div>
+                        </div>
+                        <div className={styles.detailsRow}>
+                            <div className={styles.detailsLabel}>Beschreibung:</div>
+                            <div className={styles.detailsValue}>{details.description}</div>
+                        </div>
+                        <div className={styles.detailsRow}>
+                            <div className={styles.detailsLabel}>Status:</div>
+                            <div className={styles.detailsValue}>{details.status}</div>
+                        </div>
+                    </div>
+                )}
+            </Modal>
+
         </div>
     );
 }

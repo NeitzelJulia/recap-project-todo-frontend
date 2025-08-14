@@ -43,3 +43,27 @@
     gap: .5rem;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detailsRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.detailsLabel {
+    flex: 0 0 8.5rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.detailsValue {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
