@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
 import type { ToDo } from "../types/ToDo";
-import { fetchTodos, createTodo, type TodoPayload } from "../api/todos";
+import {
+    fetchTodos,
+    createTodo,
+    deleteTodoApi,
+    updateTodoApi,
+    type TodoPayload,
+    type Status
+} from "../api/todos";
+
+const NEXT_STATUS: Record<Status, Status> = {
+    OPEN: "IN_PROGRESS",
+    IN_PROGRESS: "DONE",
+    DONE: "DONE",
+};
 
 export function useTodos() {
     const [todos, setTodos] = useState<ToDo[]>([]);
@@ -15,12 +28,30 @@ export function useTodos() {
     }, []);
 
     function addTodo(payload: TodoPayload) {
-        return createTodo(payload)
-            .then((created) => {
-                setTodos(prev => [created, ...prev]);
-                return created;
-            });
+        createTodo(payload)
+            .then((created) => setTodos(prev => [...prev, created]))
+            .catch(setError);
     }
 
-    return { todos, loading, error, addTodo, setTodos };
+    function removeTodo(id: string) {
+        deleteTodoApi(id)
+            .then(() => setTodos(prev => prev.filter(t => t.id !== id)))
+            .catch(setError);
+    }
+
+    function updateTodo(updated: ToDo) {
+        updateTodoApi(updated)
+            .then((saved) =>
+                setTodos(prev => prev.map(t => (t.id === saved.id ? saved : t)))
+            )
+            .catch(setError);
+    }
+
+    function moveToNextLane(todo: ToDo) {
+        const next = NEXT_STATUS[todo.status];
+        if (next === todo.status) return; // DONE bleibt DONE
+        updateTodo({ ...todo, status: next });
+    }
+
+    return { todos, loading, error, addTodo, removeTodo, updateTodo, moveToNextLane, setTodos };
 }

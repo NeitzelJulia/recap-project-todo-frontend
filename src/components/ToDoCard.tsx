@@ -8,9 +8,21 @@ import moveIcon from "../assets/icons/arrow-double-end-svgrepo-com.svg";
 
 type ToDoProps = {
     todo: ToDo;
-}
+    onDelete?: (id: string) => void;
+    onMoveNext?: (t: ToDo) => void;
+};
 
-export default function ToDoCard({todo}: ToDoProps) {
+export default function ToDoCard({todo, onDelete, onMoveNext}: ToDoProps) {
+    function handleDeleteClick(e: React.MouseEvent<HTMLButtonElement>) {
+        e.stopPropagation();
+        onDelete?.(todo.id);
+    }
+
+    function handleMoveNextClick(e: React.MouseEvent<HTMLButtonElement>) {
+        e.stopPropagation();
+        onMoveNext?.(todo);
+    }
+
     return (
         <li className={styles.card}>
             <div className={styles.cardContent}>
@@ -20,16 +32,16 @@ export default function ToDoCard({todo}: ToDoProps) {
                 <button className={styles.iconButton} title="Bearbeiten">
                     <img src={editIcon} alt="Bearbeiten" className={styles.iconSvg} />
                 </button>
-                <button className={styles.iconButton} title="Löschen">
+                <button className={styles.iconButton} title="Löschen" onClick={handleDeleteClick}>
                     <img src={deleteIcon} alt="Löschen" className={styles.iconSvg} />
                 </button>
                 <button className={styles.iconButton} title="Details anzeigen">
                     <img src={detailsIcon} alt="Details" className={styles.iconSvg} />
                 </button>
-                <button className={styles.iconButton} title="Eine Lane weiter">
+                <button className={styles.iconButton} title="Eine Lane weiter" onClick={handleMoveNextClick}>
                     <img src={moveIcon} alt="Eine Lane weiter" className={styles.iconSvg} />
                 </button>
             </div>
         </li>
-    )
+    );
 }

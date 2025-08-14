@@ -7,9 +7,11 @@ import type {TodoPayload} from "../api/todos";
 type OverviewPageProps = {
     todos: ToDo[];
     onCreate: (p: TodoPayload) => void;
+    onDelete: (id: string) => void;
+    onMoveNext: (t: ToDo) => void;
 };
 
-export default function OverviewPage({todos, onCreate}: OverviewPageProps) {
+export default function OverviewPage({todos, onCreate, onDelete, onMoveNext}: OverviewPageProps) {
     return (
         <section className={styles.board}>
             <header className={styles.boardHeader}>
@@ -17,9 +19,9 @@ export default function OverviewPage({todos, onCreate}: OverviewPageProps) {
             </header>
 
             <div className={lanestyles.lanes}>
-                <Lane status="OPEN"        todos={todos.filter(t => t.status === "OPEN")} onCreate={onCreate} />
-                <Lane status="IN_PROGRESS" todos={todos.filter(t => t.status === "IN_PROGRESS")} />
-                <Lane status="DONE"        todos={todos.filter(t => t.status === "DONE")} />
+                <Lane status="OPEN"        todos={todos.filter(t => t.status === "OPEN")}        onCreate={onCreate} onDelete={onDelete} onMoveNext={onMoveNext} />
+                <Lane status="IN_PROGRESS" todos={todos.filter(t => t.status === "IN_PROGRESS")}                         onDelete={onDelete} onMoveNext={onMoveNext} />
+                <Lane status="DONE"        todos={todos.filter(t => t.status === "DONE")}                                  onDelete={onDelete} onMoveNext={onMoveNext} />
             </div>
         </section>
     );

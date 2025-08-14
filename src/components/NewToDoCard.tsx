@@ -9,18 +9,16 @@ type Props = {
     onCreate?: (p: TodoPayload) => void;
 };
 
-export default function NewToDoCard({ onCreate }: Props) {
+export default function NewToDoCard({ onCreate }: Props){
     const [open, setOpen] = useState(false);
 
-    function openNewToDoDialog() {
+    function openNewToDoDialog(){
         setOpen(true);
     }
 
     function saveNewTodo(data: TodoPayload) {
-        if (onCreate) {
-            onCreate(data); // erstellt im App-State
-            setOpen(false); // Modal sofort schließen
-        }
+        if (onCreate) onCreate(data);
+        setOpen(false);
     }
 
     return (

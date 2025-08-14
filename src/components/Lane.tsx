@@ -10,9 +10,11 @@ type LaneProps = {
     status: Status;
     todos: ToDo[];
     onCreate?: (p: TodoPayload) => void;
+    onDelete?: (id: string) => void;
+    onMoveNext?: (t: ToDo) => void;
 };
 
-export default function Lane({status, todos, onCreate}: LaneProps) {
+export default function Lane({status, todos, onCreate, onDelete, onMoveNext}: LaneProps) {
     return (
         <div className={styles.lane}>
             <div className={styles.laneHeader}>
@@ -20,7 +22,9 @@ export default function Lane({status, todos, onCreate}: LaneProps) {
                 <span className={styles.laneBadge}>{todos.length}</span>
             </div>
             <ul className={styles.laneList}>
-                {todos.map((todo) => <ToDoCard todo={todo} key={todo.id} />)}
+                {todos.map((todo) =>
+                    <ToDoCard todo={todo} key={todo.id} onDelete={onDelete} onMoveNext={onMoveNext} />
+                )}
                 {status === "OPEN" && <NewToDoCard onCreate={onCreate} />}
             </ul>
         </div>
