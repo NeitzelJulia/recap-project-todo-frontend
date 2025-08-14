@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import OverviewPage from "./pages/OverviewPage.tsx";
 import Navbar from "./components/Navbar.tsx";
 import { useTodos } from "./hooks/useTodos";
+import OpenPage from "./pages/OpenPage.tsx";
+import InProgressPage from "./pages/InProgressPage.tsx";
+import DonePage from "./pages/DonePage.tsx";
 
 function App() {
     const { todos, addTodo, removeTodo, moveToNextLane } = useTodos();
@@ -21,7 +24,7 @@ function App() {
                     />
                 } />
                 <Route path="/todo/open" element={
-                    <OverviewPage
+                    <OpenPage
                         todos={todos}
                         onCreate={addTodo}
                         onDelete={removeTodo}
@@ -29,17 +32,15 @@ function App() {
                     />
                 } />
                 <Route path="/todo/in_progress" element={
-                    <OverviewPage
+                    <InProgressPage
                         todos={todos}
-                        onCreate={addTodo}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
                     />
                 } />
                 <Route path="/todo/done" element={
-                    <OverviewPage
+                    <DonePage
                         todos={todos}
-                        onCreate={addTodo}
                         onDelete={removeTodo}
                         onMoveNext={moveToNextLane}
                     />
