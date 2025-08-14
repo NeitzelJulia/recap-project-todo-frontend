@@ -19,9 +19,22 @@ export default function OverviewPage({todos, onCreate, onDelete, onMoveNext}: Ov
             </header>
 
             <div className={lanestyles.lanes}>
-                <Lane status="OPEN"        todos={todos.filter(t => t.status === "OPEN")}        onCreate={onCreate} onDelete={onDelete} onMoveNext={onMoveNext} />
-                <Lane status="IN_PROGRESS" todos={todos.filter(t => t.status === "IN_PROGRESS")}                         onDelete={onDelete} onMoveNext={onMoveNext} />
-                <Lane status="DONE"        todos={todos.filter(t => t.status === "DONE")}                                  onDelete={onDelete} onMoveNext={onMoveNext} />
+                <Lane status="OPEN"
+                      todos={todos.filter(t => t.status === "OPEN")}
+                      onCreate={onCreate}
+                      onDelete={onDelete}
+                      onMoveNext={onMoveNext}
+                />
+                <Lane status="IN_PROGRESS"
+                      todos={todos.filter(t => t.status === "IN_PROGRESS")}
+                      onDelete={onDelete}
+                      onMoveNext={onMoveNext}
+                />
+                <Lane status="DONE"
+                      todos={todos.filter(t => t.status === "DONE")}
+                      onDelete={onDelete}
+                      onMoveNext={onMoveNext}
+                />
             </div>
         </section>
     );
